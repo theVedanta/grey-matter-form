@@ -11,10 +11,195 @@
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
             crossorigin="anonymous"
         />
+
+        <style>
+            h1,
+            label,
+            h4 {
+                color: #fff;
+            }
+            input {
+                /* background: #000 !important; */
+                border: 2px #fff solid !important;
+                color: #fff !important;
+            }
+            @media (max-width: 800px) {
+                .col-5 {
+                    width: 80%;
+                }
+            }
+            @media (max-width: 500px) {
+                .col-5 {
+                    width: 95%;
+                }
+                .row {
+                    display: flex;
+                    flex-direction: column;
+                }
+                .col {
+                    width: 100%;
+                }
+            }
+        </style>
     </head>
-    <body>
-        <form action="/submit" method="POST">
-            <h1>This is a form 👍</h1>
+    <body class="bg-dark">
+        <form action="/submit" method="POST" class="container mt-5 col-5">
+            <h1 class="mb-5" style="text-align: center">
+                Grey Matters Registration
+            </h1>
+            <div class="row">
+                <div class="col">
+                    <div class="mb-4">
+                        <label for="part-1" class="form-label"
+                            >Name of Participant 1</label
+                        >
+                        <input
+                            required
+                            type="text"
+                            class="form-control bg-dark"
+                            id="part-1"
+                            name="part-1"
+                            placeholder="Name"
+                        />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-4">
+                        <label for="part-2" class="form-label"
+                            >Name of Participant 2</label
+                        >
+                        <input
+                            required
+                            type="text"
+                            class="form-control bg-dark"
+                            id="part-2"
+                            name="part-2"
+                            placeholder="Name"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="mb-4">
+                        <label for="phone-1" class="form-label"
+                            >Phone of Participant 1</label
+                        >
+                        <input
+                            required
+                            type="number"
+                            maxlength="10"
+                            class="form-control bg-dark"
+                            id="phone-1"
+                            name="phone-1"
+                            placeholder="10 digit number"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                        />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-4">
+                        <label for="phone-2" class="form-label"
+                            >Phone of Participant 2</label
+                        >
+                        <input
+                            required
+                            type="number"
+                            maxlength="10"
+                            class="form-control bg-dark"
+                            id="phone-2"
+                            name="phone-2"
+                            placeholder="10 digit number"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="mb-4">
+                        <label for="mail-1" class="form-label"
+                            >Email of Participant 1</label
+                        >
+                        <input
+                            required
+                            type="email"
+                            class="form-control bg-dark"
+                            id="mail-1"
+                            name="mail-1"
+                            placeholder="name@example.com"
+                        />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-4">
+                        <label for="mail-2" class="form-label"
+                            >Email of Participant 2</label
+                        >
+                        <input
+                            required
+                            type="email"
+                            class="form-control bg-dark"
+                            id="mail-2"
+                            name="mail-2"
+                            placeholder="name@example.com"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-4">
+                    <label for="school" class="form-label">School</label>
+                    <input
+                        required
+                        type="text"
+                        class="form-control bg-dark"
+                        id="school"
+                        name="school"
+                        placeholder="eg. DPS Vasant Kunj"
+                    />
+                </div>
+            </div>
+            <div class="row">
+                <h4 class="mt-3 mb-4">Details of Teacher incharge</h4>
+                <div class="col">
+                    <div class="mb-4">
+                        <label for="teacher-name" class="form-label"
+                            >Name</label
+                        >
+                        <input
+                            required
+                            type="text"
+                            class="form-control bg-dark"
+                            name="teacher-name"
+                            name="teacher-name"
+                            placeholder="Name of the teacher"
+                        />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-4">
+                        <label for="teacher-phone" class="form-label"
+                            >Phone Number</label
+                        >
+                        <input
+                            required
+                            type="number"
+                            maxlength="10"
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            class="form-control bg-dark"
+                            id="teacher-phone"
+                            name="teacher-phone"
+                            placeholder="10 digit number"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-lg-5 mb-5">
+                <button type="submit" class="btn btn-lg btn-primary">
+                    Register
+                </button>
+            </div>
         </form>
 
         <!-- JS -->
