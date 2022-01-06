@@ -9,6 +9,7 @@ const dbURI = process.env.DB_URL;
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const Reg = require("./models/Reg");
+const jwt = require("jsonwebtoken");
 
 // DB CONNECTION
 async function connectDB() {
@@ -38,35 +39,42 @@ app.get("/err", (req, res) => {
 
 app.post("/submit", async (req, res) => {
     const body = req.body;
+    const participants = [
+        {
+            name: body["part-1"],
+            phone: body["phone-1"],
+            mail: body["mail-1"],
+        },
+        {
+            name: body["part-2"],
+            phone: body["phone-2"],
+            mail: body["mail-2"],
+        },
+    ];
+    const teacher = {
+        name: body["teacher-name"],
+        phone: body["teacher-phone"],
+    };
 
     const reg = new Reg({
-        participants: [
-            {
-                name: body["part-1"],
-                phone: body["phone-1"],
-                mail: body["mail-1"],
-            },
-            {
-                name: body["part-2"],
-                phone: body["phone-2"],
-                mail: body["mail-2"],
-            },
-        ],
+        participants,
         school: body["school"],
-        teacher: {
-            name: body["teacher-name"],
-            phone: body["teacher-phone"],
-        },
+        teacher,
+    });
+
+    const token = jwt.sign({ school: body["school"] }, process.env.JWT_SECRET, {
+        expiresIn: "2h",
     });
 
     try {
-        await reg.save();
-        res.redirect("/regged");
+        // await reg.save();
+        res.render("regged", {
+            token,
+            teacher,
+            school: body["school"],
+            participants,
+        });
     } catch (err) {
         res.redirect("/err");
     }
-});
-
-app.get("/regged", (req, res) => {
-    res.send("<h1>Registered</h1>");
 });
