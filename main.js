@@ -37,6 +37,19 @@ app.get("/err", (req, res) => {
     res.send("<h1>Some error occurred</h1>");
 });
 
+app.get("/get-regs/:pass", async (req, res) => {
+    try {
+        const regs = await Reg.find();
+        if (req.params.pass === process.env.PASS) {
+            res.render("regs", { regs: regs });
+        } else {
+            res.redirect("/");
+        }
+    } catch (err) {
+        res.redirect("/err");
+    }
+});
+
 app.post("/submit", async (req, res) => {
     const body = req.body;
     const participants = [
@@ -63,11 +76,11 @@ app.post("/submit", async (req, res) => {
     });
 
     const token = jwt.sign({ school: body["school"] }, process.env.JWT_SECRET, {
-        expiresIn: "2h",
+        expiresIn: "24h",
     });
 
     try {
-        // await reg.save();
+        await reg.save();
         res.render("regged", {
             token,
             teacher,
@@ -75,6 +88,11 @@ app.post("/submit", async (req, res) => {
             participants,
         });
     } catch (err) {
-        res.redirect("/err");
+        if (err.code == "11000") res.send("<h1>Already registered</h1>");
+        else res.redirect("/err");
     }
+});
+
+app.get("*", (req, res) => {
+    res.send("Error 404, Not found");
 });

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const RegSchema = new mongoose.Schema({
     participants: { type: Array, required: true },
-    school: { type: String, required: true },
+    school: { type: String, required: true, unique: true },
     teacher: { type: Object, required: true },
 });
 
