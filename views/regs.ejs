@@ -15,7 +15,6 @@
     <body class="bg-dark text-white">
         <main class="container center">
             <h1 class="mt-5 text-center">Registrations</h1>
-            <% for (let reg of regs) { %>
             <table class="table text-white text-center table-dark mt-5">
                 <thead>
                     <tr>
@@ -27,7 +26,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% for (let part of reg.participants) { %>
+                    <% for (let reg of regs) { %> <% for (let part of
+                    reg.participants) { %>
                     <tr>
                         <th style="border-right: 2px solid #fff">
                             Participant
@@ -38,7 +38,7 @@
                         <td><%= reg.school %></td>
                     </tr>
                     <% } %>
-                    <tr>
+                    <tr style="border-bottom: 2px solid #fff">
                         <th style="border-right: 2px solid #fff" scope="col">
                             Teacher
                         </th>
@@ -47,9 +47,34 @@
                         <td>-</td>
                         <td><%= reg.school %></td>
                     </tr>
+                    <% } %>
                 </tbody>
             </table>
-            <% } %>
+            <button onclick="exportToExcel()" class="btn btn-light">
+                Export table to excel
+            </button>
         </main>
+
+        <script
+            type="text/javascript"
+            src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"
+        ></script>
+        <script>
+            const exportToExcel = (type, fn, dl) => {
+                console.log("h");
+                var elt = document.querySelector("table");
+                var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+                return dl
+                    ? XLSX.write(wb, {
+                          bookType: type,
+                          bookSST: true,
+                          type: "base64",
+                      })
+                    : XLSX.writeFile(
+                          wb,
+                          fn || "MySheetName." + (type || "xlsx")
+                      );
+            };
+        </script>
     </body>
 </html>
