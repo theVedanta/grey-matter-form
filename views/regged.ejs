@@ -19,14 +19,38 @@
                 <label class="form-label text-white"
                     >(copy and dm this token to the Grey Matters BOT)<br />
                     <b>Both of the participants are required to do so.</b
-                    ><br /><br />Your token
+                    ><br />
+                    server invite :- <a href="https://discord.io/greymatters21">https://discord.io/greymatters21</a> <br />
+                    <br />Token for <%= p1 %>
                 </label>
                 <input
                     type="text"
                     class="form-control form-control-lg bg-dark text-white"
                     placeholder="token"
                     readonly
-                    value="<%= token %>"
+                    value="<%= token1 %>"
+                />
+                <div class="row mt-4">
+                    <button
+                        class="btn btn-lg btn-light"
+                        id="copy"
+                        onclick="copy(this)"
+                    >
+                        Copy
+                    </button>
+                </div>
+            </div>
+
+            <div class="mb-3 mt-5">
+                <label class="form-label text-white"
+                    ><br />Token for <%= p2 %>
+                </label>
+                <input
+                    type="text"
+                    class="form-control form-control-lg bg-dark text-white"
+                    placeholder="token"
+                    readonly
+                    value="<%= token2 %>"
                 />
                 <div class="row mt-4">
                     <button

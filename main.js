@@ -75,14 +75,20 @@ app.post("/submit", async (req, res) => {
         teacher,
     });
 
-    const token = jwt.sign({ school: body["school"] }, process.env.JWT_SECRET, {
+    const token1 = jwt.sign({ school: body["school"] , pname : body["part-1"]}, process.env.JWT_SECRET, {
+        expiresIn: "24h",
+    });
+    const token2 = jwt.sign({ school: body["school"] , pname : body["part-2"]}, process.env.JWT_SECRET, {
         expiresIn: "24h",
     });
 
     try {
         await reg.save();
         res.render("regged", {
-            token,
+            p1: body["part-1"],
+            p2: body["part-2"],
+            token1: token1,
+            token2: token2,
             teacher,
             school: body["school"],
             participants,
